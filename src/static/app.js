@@ -17,37 +17,31 @@ document.addEventListener("DOMContentLoaded", () => {
       Object.entries(activities).forEach(([name, details]) => {
         const activityCard = document.createElement("div");
         activityCard.className = "activity-card";
-        activityCard.style.border = "1px solid #ccc";
-        activityCard.style.borderRadius = "8px";
-        activityCard.style.padding = "16px";
-        activityCard.style.marginBottom = "20px";
-        activityCard.style.background = "#f9f9ff";
-        activityCard.style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)";
 
         const spotsLeft = details.max_participants - details.participants.length;
 
-        // Participants list HTML
+        // Build participants list HTML
         let participantsHTML = "";
         if (details.participants.length > 0) {
           participantsHTML = `
-            <div style="margin-top: 10px;">
+            <div class="participants-section">
               <strong>Participants:</strong>
-              <ul style="margin: 6px 0 0 18px; padding: 0;">
-                ${details.participants.map(email => `<li style="margin-bottom: 2px;">${email}</li>`).join("")}
+              <ul class="participants-list">
+                ${details.participants.map(email => `<li>${email}</li>`).join("")}
               </ul>
             </div>
           `;
         } else {
           participantsHTML = `
-            <div style="margin-top: 10px;">
+            <div class="participants-section">
               <strong>Participants:</strong>
-              <span style="color: #888;">No participants yet</span>
+              <span class="no-participants">No participants yet</span>
             </div>
           `;
         }
 
         activityCard.innerHTML = `
-          <h4 style="margin-top:0;">${name}</h4>
+          <h4>${name}</h4>
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
